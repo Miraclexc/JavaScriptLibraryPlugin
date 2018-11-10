@@ -1,0 +1,8 @@
+{
+	"name": "libraries",
+	"order": [
+		"util",
+		"load",
+		"event"
+	]
+}

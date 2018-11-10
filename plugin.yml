@@ -1,0 +1,10 @@
+name: JavaScriptLibrary
+main: xingchen.jslib.JavaScriptLibrary
+version: 0.0.1
+permissions:
+ jslib.command.help:
+  default: op
+ jslib.command.run:
+  default: op
+ jslib.command.book:
+  default: op
