@@ -29,7 +29,7 @@ public class JavaScriptUtil {
 	public static EventExecutor registerEvent(HandlerList handlerList, ScriptObjectMirror callback, EventPriority priority, boolean ignoreCancelled, Listener key, Plugin plugin) {
 		EventExecutor eventExecutor = new EventExecutor() {
 			public void execute (Listener listener, Event event) {
-				callback.call(event, event);
+				callback.call(callback, event);
 			}
 		};
 		handlerList.register(new RegisteredListener(key, eventExecutor, priority, plugin, ignoreCancelled));

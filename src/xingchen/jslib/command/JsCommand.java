@@ -17,10 +17,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import jdk.nashorn.api.scripting.ScriptObjectMirror;
+import jdk.nashorn.internal.runtime.Undefined;
 import xingchen.jslib.JavaScriptLibrary;
 import xingchen.jslib.js.JavaScriptLoader;
 
 public class JsCommand extends Command {
+	public static final String CODEWRAP = "function(me) {%s}";
 	public static final Pattern UNCOLOR = Pattern.compile("§.");
 	
 	public static final String COMMANDTIP = "§2请使用  §6/js help  §2来查看帮助";
@@ -84,10 +87,12 @@ public class JsCommand extends Command {
 	
 	public void eval(CommandSender sender, String code) {
 		try {
-			this.buildCommandJsLib(sender, JavaScriptLoader.instance.getEngine().getContext());
-			Object back = JavaScriptLoader.instance.getEngine().eval(code);
-			if(back != null && back instanceof String) {
-				sender.sendMessage(back.toString());
+			Object function = JavaScriptLoader.instance.getEngine().eval(String.format(CODEWRAP, code));
+			if(function != null && function instanceof ScriptObjectMirror) {
+				Object back = ((ScriptObjectMirror) function).call(function, sender);
+				if(back != null && back != Undefined.getUndefined()) {
+					sender.sendMessage(back.toString());
+				}
 			}
 		} catch (ScriptException e) {
 			JavaScriptLibrary.instance.getConfigManager().getLogger().log(Level.WARNING, "Unable to eval javascript code: " + code, e);
