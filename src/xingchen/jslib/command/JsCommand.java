@@ -1,6 +1,7 @@
 package xingchen.jslib.command;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -10,6 +11,7 @@ import javax.script.ScriptContext;
 import javax.script.ScriptException;
 import javax.script.SimpleScriptContext;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -19,6 +21,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import jdk.nashorn.api.scripting.ScriptObjectMirror;
 import jdk.nashorn.internal.runtime.Undefined;
+import net.minecraft.server.v1_11_R1.IChatBaseComponent;
 import xingchen.jslib.JavaScriptLibrary;
 import xingchen.jslib.js.JavaScriptLoader;
 
@@ -60,12 +63,11 @@ public class JsCommand extends Command {
 					if(itemStack != null && itemStack.hasItemMeta()) {
 						ItemMeta meta = itemStack.getItemMeta();
 						if(meta instanceof BookMeta) {
+							StringBuilder sb = new StringBuilder();
 							BookMeta bookmeta = (BookMeta) meta;
-							StringBuffer sb = new StringBuffer();
-							bookmeta.getPages().stream().forEach(i -> sb.append(i));
+							bookmeta.getPages().stream().forEach(i -> sb.append(ChatColor.stripColor(i)));
 							String code = sb.toString();
 							if(code != null && !code.isEmpty()) {
-								code = UNCOLOR.matcher(code).replaceAll("");
 								this.eval(player, code);
 							}
 						} else {

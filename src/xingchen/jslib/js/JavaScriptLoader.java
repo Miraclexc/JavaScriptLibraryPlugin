@@ -2,6 +2,7 @@ package xingchen.jslib.js;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 
@@ -79,6 +80,26 @@ public class JavaScriptLoader {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	/**
+	 * 根据列表获取指定层的代码
+	 * 
+	 * @param map JavaScript表
+	 * @param path 层列表
+	 * 
+	 * @return Object（可能为代码）
+	 */
+	public Object getMapCode(Map<String, Object> map, String[] path) {
+		Object object = map;
+		for(int i=0;i<path.length;i++) {
+			if(object instanceof Map) {
+				object = ((Map) object).get(path[i]);
+			} else {
+				return null;
+			}
+		}
+		return object;
+	} 
 	
 	public ScriptEngine getEngine() {
 		return this.engine;

@@ -127,8 +127,17 @@ public class JavaScriptInfo {
 		}
 		
 		this.invokeOrder.stream().forEach(i -> {
-			if(map.get(i) instanceof String) {
-				String code = (String) map.get(i);
+			String code = null;
+			if(i.lastIndexOf("/") >= 0) {
+				Object object = JavaScriptLoader.instance.getMapCode(map, i.split("/"));
+				if(object != null) {
+					code = (String) object;
+				}
+			} else if(map.get(i) instanceof String) {
+				code = (String) map.get(i);
+			}
+			
+			if(code != null) {
 				try {
 					JavaScriptLoader.instance.getEngine().eval(code);
 				} catch (ScriptException e2) {
