@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>xingchen</groupId>
+    <artifactId>JavaScriptLibraryPlugin</artifactId>
+    <version>1.0.2</version>
+
+    <name>JavaScriptLibraryPlugin</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <out.name>JavaScriptLibraryPlugin-${project.version}</out.name>
+        <debug.mcversion>1.15.2</debug.mcversion>
+        <debug.server>E:\Minecraft资源库\服务器\服务端\域界星空${debug.mcversion}\plugins</debug.server>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot</artifactId>
+            <version>${debug.mcversion}</version>
+            <scope>system</scope>
+            <systemPath>E:/Minecraft资源库/服务器/核心/spigot-${debug.mcversion}.jar</systemPath>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${out.name}</finalName>
+        <plugins>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <copy file="${project.build.directory}/${out.name}.jar" todir="${debug.server}" overwrite="true" />
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
