@@ -24,19 +24,13 @@ public class JavaScriptLibrary extends JavaPlugin {
 		this.config = new ConfigManager(this);
 		//EventLoader.init(this);
 		CommandLoader.init(this);
-		
-		Thread currentThread = Thread.currentThread();
-        ClassLoader previousClassLoader = currentThread.getContextClassLoader();
-        currentThread.setContextClassLoader(getClassLoader());
-        
-        LinkageLoader.instance = new LinkageLoader(this);
+
+		JavaScriptLoader.instance = new JavaScriptLoader(this.getClassLoader());
+		LinkageLoader.instance = new LinkageLoader(this);
 		JavaScriptLoader.init();
-		
 		if(this.config.isLinkage()) {
 			this.getServer().getServicesManager().register(LinkageLoader.class, LinkageLoader.instance, this, ServicePriority.Normal);
 		}
-		
-		currentThread.setContextClassLoader(previousClassLoader);
 	}
 	
 	@Override

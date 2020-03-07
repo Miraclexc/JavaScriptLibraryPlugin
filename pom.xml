@@ -15,7 +15,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <out.name>JavaScriptLibraryPlugin-${project.version}</out.name>
         <debug.mcversion>1.15.2</debug.mcversion>
-        <debug.server>E:\Minecraft资源库\服务器\服务端\域界星空${debug.mcversion}\plugins</debug.server>
+        <debug.server>E:\Minecraft资源库\服务器\服务端\${debug.mcversion}\plugins</debug.server>
     </properties>
 
     <dependencies>

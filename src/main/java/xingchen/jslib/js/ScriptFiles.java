@@ -15,11 +15,11 @@ public class ScriptFiles {
 	@Nullable
 	protected File info;
 	protected File jsFile;
-	
+
 	public ScriptFiles(File jsFile) {
 		this(null, jsFile);
 	}
-	
+
 	public ScriptFiles(File info, File jsFile) {
 		this.info = info;
 		this.jsFile = jsFile;
@@ -32,12 +32,11 @@ public class ScriptFiles {
 	public File getJsFile() {
 		return this.jsFile;
 	}
-	
+
 	/**
 	 * 寻找文件夹中的信息文件，并标记
-	 * 
+	 *
 	 * @param directory 目标文件夹
-	 * 
 	 * @return 可能包含信息文件的{#ScriptFiles}
 	 */
 	public static ScriptFiles fromDirectory(File directory) {
@@ -48,7 +47,7 @@ public class ScriptFiles {
 			}
 			return new ScriptFiles(info, directory);
 		}
-		
+
 		return null;
 	}
 }

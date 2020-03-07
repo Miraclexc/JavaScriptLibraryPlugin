@@ -1,7 +1,6 @@
 package xingchen.jslib.command;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -21,7 +20,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import jdk.nashorn.api.scripting.ScriptObjectMirror;
 import jdk.nashorn.internal.runtime.Undefined;
-import net.minecraft.server.v1_11_R1.IChatBaseComponent;
 import xingchen.jslib.JavaScriptLibrary;
 import xingchen.jslib.js.JavaScriptLoader;
 
