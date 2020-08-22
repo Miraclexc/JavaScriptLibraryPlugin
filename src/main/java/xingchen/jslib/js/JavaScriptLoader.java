@@ -24,7 +24,6 @@ public class JavaScriptLoader {
     private ScriptEngine engine;
 
     public JavaScriptLoader(ClassLoader classLoader) {
-        //this.engine = (new ScriptEngineManager()).getEngineByName("nashorn");
         this.engine = (new NashornScriptEngineFactory()).getScriptEngine(classLoader);
         if(this.engine == null) {
             JavaScriptLibrary.instance.getConfigManager().getLogger().warning("The nashorn engine does not exist. Plugin will be disabled.");
@@ -104,8 +103,6 @@ public class JavaScriptLoader {
     }
 
     public static void init() {
-        //instance = new JavaScriptLoader();
-
         ConfigManager config = JavaScriptLibrary.instance.getConfigManager();
 
         if(config.getLib() != null) {

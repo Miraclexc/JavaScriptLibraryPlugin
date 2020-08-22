@@ -15,7 +15,7 @@ public class JavaScriptLibrary extends JavaPlugin {
 	private String pluginName;
 	/**配置管理器对象*/
 	private ConfigManager config;
-	
+
 	@Override
 	public void onEnable() {
 		instance = this;

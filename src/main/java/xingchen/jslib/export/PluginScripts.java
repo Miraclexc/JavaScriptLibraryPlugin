@@ -24,6 +24,7 @@ import xingchen.jslib.js.ScriptFiles;
 public class PluginScripts {
 	protected Plugin plugin;
 	protected IScriptHolder jsHolder;
+	protected ClassLoader classLoader;
 	
 	/**
 	 * 结构：
@@ -100,10 +101,6 @@ public class PluginScripts {
 		return this.plugin;
 	}
 
-	public void setPlugin(Plugin plugin) {
-		this.plugin = plugin;
-	}
-
 	public IScriptHolder getJsHolder() {
 		return this.jsHolder;
 	}
@@ -118,6 +115,18 @@ public class PluginScripts {
 
 	public void setScripts(List<KeyValue<JavaScriptInfo, Object>> scripts) {
 		this.scripts = scripts;
+	}
+
+	public ClassLoader getClassLoader() {
+		return this.classLoader;
+	}
+
+	public void setClassLoader(ClassLoader classLoader) {
+		this.classLoader = classLoader;
+	}
+
+	public void setEvalled(boolean evalled) {
+		isEvalled = evalled;
 	}
 
 	public boolean isEvalled() {

@@ -43,14 +43,14 @@ public class LinkageLoader {
 	public void evalAll() {
 		this.linkages.entrySet().stream().forEach(i -> i.getValue().evalAll());
 	}*/
-	
+
 	/**
 	 * 添加路径
 	 * {#IScriptHolder}实现类：{#ScriptHolderBase}
 	 * 
 	 * @reture 注册是否成功
 	 */
-	public boolean registerLinkage(String name, Plugin plugin, IScriptHolder jsHolder) {
+	public boolean registerLinkage(String name, Plugin plugin, IScriptHolder jsHolder, ClassLoader classLoader) {
 		if(this.getLinkages().containsKey(name)) {
 			return false;
 		}
@@ -60,14 +60,20 @@ public class LinkageLoader {
 		if(preEvent.isCancelled()) {
 			return false;
 		}
-		
-		this.linkages.put(name, new PluginScripts(plugin, jsHolder));
-		this.linkages.get(name).loadScripts();
-		this.linkages.get(name).evalAll();
+
+		PluginScripts scripts = new PluginScripts(plugin, jsHolder);
+		scripts.setClassLoader(classLoader);
+		this.linkages.put(name, scripts);
+		scripts.loadScripts();
+		scripts.evalAll();
 		
 		this.plugin.getServer().getPluginManager().callEvent(new JavaScriptFilesEvalledEvent(this, name));
 		
 		return true;
+	}
+
+	public boolean registerLinkage(String name, Plugin plugin, IScriptHolder jsHolder) {
+		return registerLinkage(name, plugin, jsHolder, null);
 	}
 
 	public Plugin getPlugin() {
